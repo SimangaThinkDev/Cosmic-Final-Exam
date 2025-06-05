@@ -94,7 +94,6 @@ public class CosmicFinalExam {
             return input;
         }
 
-        // Normalize shift to be within 0-25
         shift = shift % 26;
         if (shift < 0) {
             shift += 26;
@@ -104,13 +103,10 @@ public class CosmicFinalExam {
 
         for (char c : input.toCharArray()) {
             if (Character.isLetter(c)) {
-                // Determine case and base ASCII value
                 char base = Character.isUpperCase(c) ? 'A' : 'a';
-                // Apply shift and wrap around alphabet
                 char shifted = (char) ((c - base + shift) % 26 + base);
                 result.append(shifted);
             } else {
-                // Keep non-alphabetic characters unchanged
                 result.append(c);
             }
         }
