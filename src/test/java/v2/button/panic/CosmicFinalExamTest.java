@@ -110,8 +110,8 @@ public class CosmicFinalExamTest {
 
     @Test
     void testTagOutDeductsDestinationFare() {
-        // Case 1: Zenthros (20 orglings)
-        assertEquals(68.0, CosmicFinalExam.tagOut("Zenthros", 100.0),
+        // Case 1: Zenthros (20 orglings) //Todo: tagging in while tagging out is not intuitive
+        assertEquals(68, CosmicFinalExam.tagOut("Zenthros", 100.0),
                 "100 - 12 (tagIn) - 20 (Zenthros) = 68");
 
         // Case 2: Kryndor (22 orglings)

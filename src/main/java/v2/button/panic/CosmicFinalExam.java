@@ -1,5 +1,7 @@
 package v2.button.panic;
 
+import java.util.Map;
+
 public class CosmicFinalExam {
 
     /**
@@ -7,6 +9,9 @@ public class CosmicFinalExam {
      */
     public static void welcome(int n) {
         // TODO: Implement method to print "Fanta" n times
+        for (int i = 0; i < n ; i++) {
+            System.out.println("Fanta");
+        }
     }
 
     /**
@@ -15,7 +20,10 @@ public class CosmicFinalExam {
      */
     public static double tagIn(double balance) {
         // TODO: Implement tagIn fare deduction logic
-        return 0;
+        if (balance < 12) {
+            throw new IllegalArgumentException();
+        }
+        return balance-12;
     }
 
     /**
@@ -23,7 +31,10 @@ public class CosmicFinalExam {
      */
     public static double transfer(double balance) {
         // TODO: Implement transfer fare deduction logic
-        return 0;
+        if (balance < 2) {
+            throw new IllegalArgumentException();
+        }
+        return balance-2;
     }
 
     /**
@@ -36,7 +47,13 @@ public class CosmicFinalExam {
      */
     public static double tagOut(String destination, double balance) throws IllegalArgumentException {
         // TODO: Implement tagOut fare deduction logic based on destination
-        return 0;
+        balance = tagIn(balance);
+        Map<String, Double> fares = Map.of("zenthros", 20.0,"kryndor" ,
+                22.0,"bryxaria",27.0);
+        if (balance < fares.getOrDefault(destination.toLowerCase(),0.0)) {
+            throw new IllegalArgumentException();
+        }
+        return balance - fares.getOrDefault(destination.toLowerCase(),0.0);
     }
 
     /**
@@ -46,7 +63,10 @@ public class CosmicFinalExam {
      */
     public static double lawOfGravity(double m1, double m2, double r) {
         // TODO: Implement gravitational force calculation
-        return 0;
+        if (r == 0){
+            throw new IllegalArgumentException();
+        }
+        return 6.67430e-11 * (m1 * m2) / (r*r);
     }
 
     /**
@@ -56,9 +76,10 @@ public class CosmicFinalExam {
      * Author's note:
      *      Maybe you need to use a float, or the Author is dumb, One is true
      */
+    //todo: perhaps he is?
     public static double velocity(double distance, double time) {
         // TODO: Implement velocity calculation
-        return 0;
+        return distance / time;
     }
 
     /**
@@ -66,6 +87,8 @@ public class CosmicFinalExam {
      */
     public static String caesarCipher(String input, int shift) {
         // TODO: Implement Caesar Cipher encryption
+        String alpha = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+
         return "";
     }
 
