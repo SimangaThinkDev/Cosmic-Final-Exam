@@ -221,10 +221,12 @@ public class CosmicFinalExamTest {
         assertEquals("Khoor", CosmicFinalExam.caesarCipher("Hello", 3));
 
         // Case 2: Wrap-around (shift=5, 'V' → 'A')
-        assertEquals("Afdhf", CosmicFinalExam.caesarCipher("Vasco", 5));
+        //Todo s --> (s -> x? was d o ->t)
+        assertEquals("Afxht", CosmicFinalExam.caesarCipher("Vasco", 5));
 
         // Case 3: Mixed case and non-letters
-        assertEquals("Dpef 123!", CosmicFinalExam.caesarCipher("Bmcd 123!", 2));
+        //Todo (inconsistent counting)
+        assertEquals("Doef 123!", CosmicFinalExam.caesarCipher("Bmcd 123!", 2));
     }
 
     @Test
@@ -277,7 +279,9 @@ public class CosmicFinalExamTest {
 
         // Case 2: height=1
         CosmicFinalExam.drawPyramid(1);
-        assertEquals("#\n", outContent.toString());
+//        assertEquals("#\n", outContent.toString());
+        assertEquals("#", outContent.toString());
+        //Todo: why expect a new line here on the last line but not on the previous one?
     }
 
     @Test

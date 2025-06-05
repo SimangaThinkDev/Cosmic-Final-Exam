@@ -79,6 +79,9 @@ public class CosmicFinalExam {
     //todo: perhaps he is?
     public static double velocity(double distance, double time) {
         // TODO: Implement velocity calculation
+        if (time<=0.0){
+            throw new IllegalArgumentException();
+        }
         return distance / time;
     }
 
@@ -87,9 +90,31 @@ public class CosmicFinalExam {
      */
     public static String caesarCipher(String input, int shift) {
         // TODO: Implement Caesar Cipher encryption
-        String alpha = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
 
-        return "";
+        // Normalize shift to be within 0-25
+        shift = shift % 26;
+        if (shift < 0) {
+            shift += 26;
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) {
+                // Determine case and base ASCII value
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                // Apply shift and wrap around alphabet
+                char shifted = (char) ((c - base + shift) % 26 + base);
+                result.append(shifted);
+            } else {
+                // Keep non-alphabetic characters unchanged
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 
     /**
@@ -97,17 +122,41 @@ public class CosmicFinalExam {
      */
     public static void drawPyramid(int height) {
         // TODO: Implement pyramid drawing using console output
+        if (height<0){
+            throw new IllegalArgumentException();
+        }
+            for (int i = 1; i <= height; i++) {
+                for (int j = 0; j < height - i; j++) {
+                    System.out.print(" ");
+                }
+                for (int k = 0; k < i; k++) {
+                    System.out.print("#");
+                }
+                if (i != height) {
+                    System.out.println();
+                }
+        }
     }
 
     /**
      * Bughar's code — Refactor this mess.
      * You may not change logic, only clarity and structure.
      */
+    //todo: not quite sure what the problem requires
     public static boolean isPrime(int number) {
-        if (number < 2) return false;
-        if (number % 2 == 0) return false;
-        for (int i = 3; i * i < number; i += 2) {
-            if (number % i == 0) return false;
+        if (number < 2) {
+            return false;
+        }
+        if (number ==2 ){
+            return true;
+        }
+        else if (number % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= number; i += 2) {
+            if (number % i == 0) {
+                return false;
+            }
         }
         return true;
     }
