@@ -111,38 +111,51 @@ public class CosmicFinalExamTest {
             CosmicFinalExam.tagIn(11.999);
         }, "Should throw if deduction would result in negative");
     }
-
     @Test
     void testTagOutDeductsDestinationFare() {
         // Case 1: Zenthros (20 orglings) //Todo: tagging in while tagging out is not intuitive
-        assertEquals(68, CosmicFinalExam.tagOut("Zenthros", 100.0),
+        assertEquals(80, CosmicFinalExam.tagOut("Zenthros", 100.0),
+                "100 - 20 (Zenthros) = 80");
+
+        // Case 2: Kryndor (22 orglings)
+        assertEquals(78.0, CosmicFinalExam.tagOut("Kryndor", 100.0),
+                "100 - 22 = 78");
+
+        // Case 3: Unknown destination (0 additional)
+        assertEquals(100.0, CosmicFinalExam.tagOut("Unknown", 100.0),
+                "100 - 0 = 100");
+    }
+    @Test
+    void testTagInAndTagOutDeductsDestinationFare() {
+        // Case 1: Zenthros (20 orglings) //Todo: tagging in while tagging out is not intuitive
+        assertEquals(68, CosmicFinalExam.tagOut("Zenthros", CosmicFinalExam.tagIn(100.0)),
                 "100 - 12 (tagIn) - 20 (Zenthros) = 68");
 
         // Case 2: Kryndor (22 orglings)
-        assertEquals(66.0, CosmicFinalExam.tagOut("Kryndor", 100.0),
+        assertEquals(66.0, CosmicFinalExam.tagOut("Kryndor", CosmicFinalExam.tagIn(100.0)),
                 "100 - 12 - 22 = 66");
 
         // Case 3: Unknown destination (0 additional)
-        assertEquals(88.0, CosmicFinalExam.tagOut("Unknown", 100.0),
+        assertEquals(88.0, CosmicFinalExam.tagOut("Unknown", CosmicFinalExam.tagIn(100.0)),
                 "100 - 12 - 0 = 88");
     }
 
     @Test
     void testTagOutRejectsNegativeBalances() {
-        // Case 4: Insufficient funds for Zenthros (12 + 20 = 32 needed)
+        // Case 4: Insufficient funds for Zenthros (20 needed)
         assertThrows(IllegalArgumentException.class, () -> {
-            CosmicFinalExam.tagOut("Zenthros", 31.9);
-        }, "Should throw if balance < 32");
+            CosmicFinalExam.tagOut("Zenthros", 19.9);
+        }, "Should throw if balance < 20");
 
-        // Case 5: Exact fare (balance = 12 + 27 = 39 for Bryxaria)
-        assertEquals(0.0, CosmicFinalExam.tagOut("Bryxaria", 39.0),
-                "39 - 12 - 27 = 0");
+        // Case 5: Exact fare (balance = 27 for Bryxaria)
+        assertEquals(0.0, CosmicFinalExam.tagOut("Bryxaria", 27.0),
+                "39- 27 = 0");
     }
 
     @Test
     void testTagOutCaseInsensitiveDestination() {
         // Case 6: Case-insensitive destination (e.g., "zEnThRoS")
-        assertEquals(68.0, CosmicFinalExam.tagOut("zEnThRoS", 100.0),
+        assertEquals(80.0, CosmicFinalExam.tagOut("zEnThRoS", 100.0),
                 "Should handle case-insensitive destinations");
     }
 

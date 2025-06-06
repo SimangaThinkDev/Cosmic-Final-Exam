@@ -49,7 +49,7 @@ public class CosmicFinalExam {
      */
     public static double tagOut(String destination, double balance) throws IllegalArgumentException {
         // TODO: Implement tagOut fare deduction logic based on destination
-        balance = tagIn(balance);
+        //balance = tagIn(balance);
         Map<String, Double> fares = Map.of("zenthros", 20.0,"kryndor" ,
                 22.0,"bryxaria",27.0);
         if (balance < fares.getOrDefault(destination.toLowerCase(),0.0)) {
