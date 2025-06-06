@@ -1,5 +1,7 @@
 package v2.button.panic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CosmicFinalExam {
@@ -176,7 +178,22 @@ public class CosmicFinalExam {
      */
     public static String showOrglings( double Orglings ) {
         // TODO: Implement this method
-        return "";
+        StringBuilder orglin = new StringBuilder();
+        ArrayList<List<String>>  denominations = new ArrayList<>();
+        denominations.add(List.of("B","15.0"));
+        denominations.add(List.of("A","10.0"));
+        denominations.add(List.of("Z","5.0"));
+        denominations.add(List.of("Y","1.0"));
+
+        for (List<String> conversion : denominations){
+            double currentDouble = Double.parseDouble(conversion.get(1));
+            String currentOrg = conversion.get(0);
+            while (Orglings >= currentDouble){
+                Orglings -= currentDouble;
+                orglin.append(currentOrg);
+            }
+        }
+        return orglin.toString();
     }
 
     /**

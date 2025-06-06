@@ -39,8 +39,10 @@ public class CosmicFinalExamTest {
         // Exact amount case
         assertEquals(0.0, CosmicFinalExam.tagIn(12.0), 0.001);
 
-        // Insufficient funds case (should go negative)
-        assertEquals(-12.0, CosmicFinalExam.tagIn(0.0), 0.001);
+        // Insufficient funds case (should NOT go negative)
+        assertThrows(IllegalArgumentException.class, () -> {
+            CosmicFinalExam.transfer(0.0);
+        }, "Should throw if balance < 12");
 
         // Large number case
         assertEquals(Double.MAX_VALUE - 12, CosmicFinalExam.tagIn(Double.MAX_VALUE), 0.001);
@@ -55,7 +57,9 @@ public class CosmicFinalExamTest {
         assertEquals(0.0, CosmicFinalExam.transfer(2.0), 0.001 );
 
         // Case 3: Insufficient funds (balance < 2)
-        assertEquals(-2.0, CosmicFinalExam.transfer(0.0), 0.001 );
+        assertThrows(IllegalArgumentException.class, () -> {
+            CosmicFinalExam.transfer(0.0);
+        }, "Should throw if balance < 2");
 
         // Case 4: Floating-point precision (e.g., 5.5 - 2)
         assertEquals(3.5, CosmicFinalExam.transfer(5.5), 0.001 );
@@ -382,15 +386,21 @@ public class CosmicFinalExamTest {
     @Test
     void testIsPrimePerformance() {
         // Verify efficiency (should handle large numbers without delay)
-        long startTime = System.nanoTime();
-        long duration = System.nanoTime() - startTime;
+
+
         
         // Run tests on efficiency multiple times to avoid lucky runs
+        long startTime = System.nanoTime();
         assertTrue(CosmicFinalExam.isPrime(1_000_003));
+        long duration = System.nanoTime() - startTime;
+        startTime = System.nanoTime();
         assertTrue(duration < 1_000_000_000, "Should complete within 1 second");
         assertTrue(CosmicFinalExam.isPrime(1_000_003));
+        duration = System.nanoTime() - startTime;
         assertTrue(duration < 1_000_000_000, "Should complete within 1 second");
+        startTime = System.nanoTime();
         assertTrue(CosmicFinalExam.isPrime(1_000_003));
+        duration = System.nanoTime() - startTime;
         assertTrue(duration < 1_000_000_000, "Should complete within 1 second");
     }
     
@@ -422,7 +432,6 @@ public class CosmicFinalExamTest {
     assertEquals("YYYY", result); // Just Ys
 
     result = CosmicFinalExam.showOrglings(14);
-    assertEquals("AZYYYY", result); // 10 + 5 = 15 → too much → must be 10 + 1 + 1 + 1 + 1
     assertEquals("AYYYY", CosmicFinalExam.showOrglings(14));
 }
 
@@ -449,10 +458,7 @@ public class CosmicFinalExamTest {
         String result;
 
         result = CosmicFinalExam.showOrglings(56);
-        assertEquals("BBBAAYY", result); 
-
-        result = CosmicFinalExam.showOrglings(56);
-        assertEquals("BBAAY", result); // 15 + 15 + 10 + 10 + 1 + 1
+        assertEquals("BBBAY", result); // 15 + 15 + 15 + 10  + 1
 
         result = CosmicFinalExam.showOrglings(100);
         // Try 15*6 = 90, then 10 = 100 → "BBBBBBA"
