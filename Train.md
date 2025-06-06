@@ -5,11 +5,11 @@
     2. transfer()
     3. tagOut()
 
-```
+
 This is just a mock train system, if you wish to build a more rigorous program, 
 you are more than welcome, But this is to just simulate how a train system can
 but it is not exactly correct
-```
+
 
 ## Explanation
 
