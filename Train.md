@@ -30,5 +30,3 @@ we have only three destinations possible:
     - If the specified destination is not in the above three, we just 
       deduct R12
 ```
-
-## Use the unit tests to guide you here...
