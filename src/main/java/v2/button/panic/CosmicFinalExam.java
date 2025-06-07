@@ -29,6 +29,9 @@ public class CosmicFinalExam {
      */
     public static void welcome(int n) {
         // TODO: Implement method to print "Fanta" n times
+        for ( int i = 0 ; i < n ; i++ ) {
+            System.out.println( "Fanta" );
+        }
     }
 
     /**
@@ -37,7 +40,10 @@ public class CosmicFinalExam {
      */
     public static double tagIn(double balance) {
         // TODO: Implement tagIn fare deduction logic
-        return 0;
+        if ( balance < 12 ) {
+            throw new IllegalArgumentException( "Balance should be greater than or equal to 12" );
+        }
+        return balance - 12;
     }
 
     /**
@@ -45,7 +51,10 @@ public class CosmicFinalExam {
      */
     public static double transfer(double balance) {
         // TODO: Implement transfer fare deduction logic
-        return 0;
+        if ( balance < 2 ) {
+            throw new IllegalArgumentException( "Insufficient funds to continue" );
+        }
+        return balance - 2;
     }
 
     /**
@@ -58,7 +67,27 @@ public class CosmicFinalExam {
      */
     public static double tagOut(String destination, double balance) throws IllegalArgumentException {
         // TODO: Implement tagOut fare deduction logic based on destination
-        return 0;
+
+        if ( destination.equalsIgnoreCase( "Zenthros" ) ) {
+            if ( balance >= 20 ) {
+                return balance - 20;
+            }
+            throw new IllegalArgumentException( "" );
+            
+        }
+        else if ( destination.equalsIgnoreCase("Kryndor") ) {
+            if ( balance >= 22 ) {
+                return balance - 22;
+            }
+            throw new IllegalArgumentException( "" );
+        }
+        else if ( destination.equalsIgnoreCase( "Bryxaria" ) ) {
+            if ( balance >= 27 ) {
+                return balance - 27;
+            }
+            throw new IllegalArgumentException( "" );
+        }
+        return balance; // Never happens
     }
 
     /**
@@ -68,7 +97,9 @@ public class CosmicFinalExam {
      */
     public static double lawOfGravity(double m1, double m2, double r) {
         // TODO: Implement gravitational force calculation
-        
+        if ( r == 0 ) {
+            throw new IllegalArgumentException( "" );
+        }
         return 6.67430e-11 * (m1 * m2) / (r * r);
     }
 
@@ -81,7 +112,10 @@ public class CosmicFinalExam {
      */
     public static double velocity(double distance, double time) {
         // TODO: Implement velocity calculation
-        return 0;
+        if ( time <= 0 ) {
+            throw new IllegalArgumentException();
+        }
+        return distance / time;
     }
 
     /**
@@ -89,6 +123,13 @@ public class CosmicFinalExam {
      */
     public static String caesarCipher(String input, int shift) {
         // TODO: Implement Caesar Cipher encryption
+
+        for ( char c : input.toCharArray() ) {
+
+            
+
+        }
+
         return "";
     }
 
@@ -97,6 +138,16 @@ public class CosmicFinalExam {
      */
     public static void drawPyramid(int height) {
         // TODO: Implement pyramid drawing using console output
+        if ( height < 0 ) throw new IllegalArgumentException();
+        for ( int i = 0 ; i < height ; i++ ){
+            for ( int j = 1 ; j < height - i ; j++ ) {
+                System.out.print(" ");
+            }
+            for ( int k = 0 ; k <= i ; k++ ) {
+                System.out.print( "#" );
+            }
+            if ( i != height - 1 ) System.out.println();
+        }
     }
 
     /**
@@ -105,8 +156,9 @@ public class CosmicFinalExam {
      */
     public static boolean isPrime(int number) {
         if (number < 2) return false;
+        if ( number == 2 || number == 3 ) return true;
         if (number % 2 == 0) return false;
-        for (int i = 3; i * i < number; i += 2) {
+        for (int i = 3; i < number; i += 2) {
             if (number % i == 0) return false;
         }
         return true;
