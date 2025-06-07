@@ -169,8 +169,8 @@ public class CosmicFinalExam {
      * The denomination should be from top to bottom, Ignore decimal Values
      *
      * Orgling Denominations
-     * "A" = 10
      * "B" = 15
+     * "A" = 10
      * "Z" = 5
      * "Y" = 1
      * 
@@ -183,7 +183,37 @@ public class CosmicFinalExam {
      */
     public static String showOrglings( double Orglings ) {
         // TODO: Implement this method
-        return "";
+        if ( Orglings < 0 ) throw new IllegalArgumentException();
+        if ( Orglings == 0 ) return "";
+
+        int b_s = ( int ) Math.floorDiv( (int) Orglings, 15 );
+        Orglings -= (b_s * 15);
+        int a_s = ( int ) Math.floorDiv( (int) Orglings , 10 );
+        Orglings -= (a_s * 10);
+        int z_s = ( int ) Math.floorDiv( (int) Orglings , 5 );
+        Orglings -= (z_s * 5);
+        int y_s = ( int ) Math.floorDiv( (int) Orglings , 1 );
+
+        String result = "";
+        result += adder( "B" , b_s);
+        result += adder( "A", a_s );
+        result += adder( "Z", z_s );
+        result += adder( "Y", y_s );
+
+        return result;
+
+    }
+
+    static String adder( String from, int times ) {
+        String result = "";
+        for ( int i = 0 ; i < times ; i++ ) {
+            result += from;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println( showOrglings(50) );
     }
 
     /**
