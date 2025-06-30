@@ -2,7 +2,8 @@ name: Test Branch vs Main with Email Grading
 
 on:
   push:
-    branches-ignore: [main]
+    branches-ignore:
+      [main]
   pull_request_target:
     branches:
       - main
@@ -16,11 +17,13 @@ jobs:
         with:
           ref: main
           path: ./main
+        run:
+          echo ls # I do not know what I am doing
 
       - name: Checkout new branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha }} # Takes the branch where git is currently focusing on
           path: ./new-branch
 
       - name: Setup Java
