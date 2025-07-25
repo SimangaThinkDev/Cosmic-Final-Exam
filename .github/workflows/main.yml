@@ -2,7 +2,7 @@ name: Test Branch vs Main with Email Grading
 
 on:
   push:
-    branches-ignore: [main]
+    branches-ignore: [test]
   pull_request_target:
     branches:
       - main
